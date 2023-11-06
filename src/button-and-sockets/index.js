@@ -17,6 +17,19 @@ app.use(bodyParser.urlencoded({ extended: true }));
 await createBoard({ repl: false });
 
 // Add in server-side socket.io code here.
+const button = new five.Button(2);
+
+io.on('connection', (socket) => {
+  console.log('🔌 Socket connection established.');
+
+  button.on('down', () => {
+    socket.emit('button', 'down');
+  });
+
+  button.on('up', () => {
+    socket.emit('button', 'up');
+  });
+});
 
 server.listen(PORT, () => {
   console.log('🤖 Express and Johnny-Five are up and running.');
