@@ -15,3 +15,8 @@ socket.on('button', (message) => {
   console.log(message);
   buttonState.innerHTML = message;
 });
+
+socket.on('potentiometer', (value, raw) => {
+  console.log(value, raw);
+  document.body.style.backgroundColor = `rgb(${value}, ${value}, ${value})`;
+});

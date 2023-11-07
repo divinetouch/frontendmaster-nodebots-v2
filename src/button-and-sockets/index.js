@@ -18,6 +18,9 @@ await createBoard({ repl: false });
 
 // Add in server-side socket.io code here.
 const button = new five.Button(2);
+const potentiometer = new five.Sensor('A0');
+
+potentiometer.scale([0, 255]);
 
 io.on('connection', (socket) => {
   console.log('🔌 Socket connection established.');
@@ -28,6 +31,11 @@ io.on('connection', (socket) => {
 
   button.on('up', () => {
     socket.emit('button', 'up');
+  });
+
+  potentiometer.on('change', () => {
+    console.log(potentiometer.value);
+    socket.emit('potentiometer', potentiometer.value, potentiometer.raw);
   });
 });
 
