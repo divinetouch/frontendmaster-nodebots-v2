@@ -19,6 +19,15 @@ await createBoard({ repl: false });
 // Add in server-side socket.io code here.
 const button = new five.Button(2);
 const potentiometer = new five.Sensor('A0');
+const light = new five.Light({
+  pin: 'A1',
+  freq: 500,
+  threshold: 5,
+});
+
+light.on('change', () => {
+  console.log({ value: light.value, raw: light.raw });
+});
 
 potentiometer.scale([0, 255]);
 
