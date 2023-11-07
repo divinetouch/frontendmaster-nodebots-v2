@@ -11,7 +11,16 @@ const server = http.createServer(app);
 const io = new Server(server);
 const { PORT = 3000 } = process.env;
 
-const board = await createBoard({ repl: false });
+const board = await createBoard({ repl: true });
+
+const rgb = new five.Led.RGB([10, 9, 8]);
+
+rgb.on();
+rgb.color('#FF0000');
+
+board.repl.inject({
+  rgb,
+});
 
 // Your code goes here!
 
